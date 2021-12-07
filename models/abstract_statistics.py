@@ -15,5 +15,5 @@ class AbstractStatistcs(ABC):
         pass
 
     @abstractmethod
-    def update(self):
+    def update(self, *args):
         pass

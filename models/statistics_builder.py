@@ -7,7 +7,7 @@ class StatisticsBuilder:
     @classmethod
     def build(cls, raw: str):
         stat_type, body = raw.split(cls.separator)
-        if stat_type == "tpy":
+        if stat_type == "score":
             pass
         else:
             raise UnknownStatisticsTypeError

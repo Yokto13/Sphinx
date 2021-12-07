@@ -3,9 +3,8 @@ from abc import ABC, abstractmethod
 
 class AbstractQuestion(ABC):
     @abstractmethod
-    def __init__(self):
-        self._question = None
-        self._answer = None
+    def __init__(self, *args):
+        pass
 
     @property
     @abstractmethod
@@ -15,7 +14,7 @@ class AbstractQuestion(ABC):
     @question.setter
     @abstractmethod
     def question(self, val):
-        self._question = val
+        pass
 
     @property
     @abstractmethod
@@ -25,4 +24,4 @@ class AbstractQuestion(ABC):
     @question.setter
     @abstractmethod
     def answer(self, val):
-        self._answer = val
+        pass

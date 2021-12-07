@@ -1,4 +1,4 @@
-""" Holds are statistics for some question and manages them.
+""" Holds all statistics for some question and manages them.
 
     One question might have multiple statistics (for example time, correctness...).
 """
@@ -15,7 +15,7 @@ class StatisticsHolder:
 
     def add_statistics(self, key: str, stat: AbstractStatistcs):
         if key in self._statistics:
-            raise LookupError
+            raise LookupError("The key is already present in the holder.")
         else:
             self._statistics[key] = stat
 
@@ -33,3 +33,9 @@ class StatisticsHolder:
         for stat_type, stat in self._statistics.items():
             res.append(stat_type + self.type_stat_separator + stat.dump())
         return self.stat_stat_separator.join(res)
+
+    def __getitem__(self, item):
+        return self._statistics[item]
+
+    def __delitem__(self, key):
+        self.remove_statistics(key)

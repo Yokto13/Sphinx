@@ -72,7 +72,7 @@ class ScoreStatisticsTestCase(unittest.TestCase):
 
 class BasicQuestionTestCase(unittest.TestCase):
     def test_creation(self):
-        """ Ultra simple test just checking if the thing is created as expected. """
+        """ Ultra simple test just checking if BQ is created as expected. """
         q = "What is the temperature of water in Bolevak?"
         a = "2.5"
         bq = BasicQuestion(q, a)
@@ -82,7 +82,7 @@ class BasicQuestionTestCase(unittest.TestCase):
 
 class BasicQuestionWithStatisticsTestCase(unittest.TestCase):
     def test_creation(self):
-        """ Ultra simple test just checking if the thing is created as expected. """
+        """ Ultra simple test just checking if BQwS is created as expected. """
         q = "What is the temperature of water in Bolevak?"
         a = "2.5"
         bq = BasicQuestionWithStatistics(q, a, score=True)

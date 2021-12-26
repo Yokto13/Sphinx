@@ -1,0 +1,87 @@
+Question,Answer
+Co je to Address Resolution Protocol?,"Technický protokol, který propojuje síťovou a linkovou vrstvu. Překládá IP adresy na MAC. Funguje tak, že má tabulku, kde si udržuje dvojice IP a MAC. Když dvojice v tabulce není, vyšle dotaz s broudcastovou MAC adresou na všechny stroje, aby zjistil správné propojení."
+Co je ARP cache?,Uložiště na dvojice IP-MAC pro ARP. Dvojice se ukládají po dobu řádově minut.
+K čemu slouží příkaz arp -a?,Vypíše obsah ARP cache.
+Lze ve stejné LAN používat karty se stejnou MAC?,"Ano, pokud na sebe nevidí. Jsou odděleny routerem."
+Jak vypadá broadcastová MAC adresa?,FF:FF:FF:FF:FF:FF
+K čemu slouží broadcastová MAC adresa?,One to all komunikace.
+Jaké jsou problémy se zabezpečením ARPu?,Dotaz dorazí všem a každý tak může odpovídat.
+Co je to nevyžádané ARP/gratious ARP?,"ARP bez předchozího dotazu, v klastrových řešeních, kdy má víc strojů stejnou IP a ozve se ten, který chce být zrovna aktivní."
+K čemu slouží ARP proxy?,"Pokud chceme z počítače A komunikovat s B v jiné podsíti, můžem na routeru spojujícím podsítě spustit ARP proxy. Když přijde dotaz, router pozná, že A nikdy nemůže najít B a začne se tvářit jako počítač B. To pak vede k tomu, že v ARP cachy je klidně několik IP adres se stejnou MAC adresou."
+"Co značí, když je v ARP cachy více IP se stejnou MAC?","Buď používáme ARP proxy, nebo se nás snaží někdo napadnou a navést všechny dotazy na jednu MAC."
+Jaké podvrstvy má linková vrstva?,Logical Link Control (LLC) a Media Access Control (MAC)
+Co má na starost podvrstva LLC?,multiplexing
+Co má na starost podvrstva MAC?,adresaci a řízení přístupů uzlů k fyzickému médiu
+Co je multiplexing?,"Proces, kdy se více signálů spojuje do jednoho. Zařízení, které ho má na starost se nazývá multiplexor."
+Co je to rámec/frame? (linkový protokol),Datová jednotka linkového protokolu.
+Co obsahuje rámec? (v linkovém protokolu),"Synchronizační pole, hlavičku, data, patičku"
+Co je synchronizační pole?,"Sekvence bitů, která má probudit cílovou stanici"
+Co je hlavička v rámci LP?,"Úvodní část, obsahuj MAC adresy odesílatele a příjemce a řídící informace LLC."
+Co je patička v rámci LP?,Obsahuje FCS = hodnota sloužící ke kontrole správnosti doručení.
+Z jakých pohledů můžeme řešit topologii sítě?,Fyzického a logického
+Jaké jsou obvyklé typy topologii?,"Sběrnice, kruh, hvězda"
+Jak funguje topologie sběrnice?,Sériové připojení na jedno médium
+Jak funguje topologie hvězda?,Všechny stanice jsou připojeny na jeden centrální prvek
+Jak funguje topologie sběrnice?,Propojení mezi stanicemi tvoří cyklus
+Co je to point-to-point topologie?,"Topologie, kde se propojují navzájem jen dva uzly?"
+Co dělá modem?,"Moduluje datový provoz, aby se dal přenésto pomocí telefonního spojení."
+Řízení komunikace u multipoint topologií?,"Deterministické např v Token-ringu je zvláštní paket hrající roli řídícího prvku. Nedetermistické, každý vysílá jak chce, dochází ke kolizím."
+Řízení komunikace u point-to-point topologií?,Half-duplex uzel neumí zároveň přijíma i vysílat => kolize. Full-duplex oboje naráz => žádné kolize.
+Co je to ‘nosná’?,Přenosové médium
+Co je CSMA?,"Uzel poslouchá nosnou, a pokud není volná, čeká"
+CSMA/CD?,Uzel během vysílání ještě kontroluje colize (proto CD)
+CSMA/CA?,"Když je nosná volná, vysílá se a čeká na ACK. Nedorazí-li ACK, nebo není-li nosná volná, zahájí se exponenciální čekání."
+Exponencilání čekání?,"Střední hodnota intervalu, odkud se vybírá doba dalšího čekání se s průběžně zdvojnásobuje."
+Jaké řízení přístupu používá ethernet?,CSMA/CD
+Kde vznikl ethernet?,V Xeroxu :)
+Specifikace Ethernetové adresy?,"6 bajtů, první 3 prefix výrobce, druhé tři vlastní číslo karty."
+Jsou normy IEEE veřejné?,"Ne na rozdíl třeba od RFC, je nutné koupit licenci"
+Rozdíl mezi hlavičkou IP a hlavičkou ethernetového rámce?,"V ethernetu předchází adresa příjemce adrese odesílatele, aby šlo rychle rozpoznat, zda je rámce určený danému uzlu."
+Co je VLANID?,"Identifikátor ve VLAN, má 12bitů"
+Kdy používáme VLAN?,Když potřebujeme rozdělit jednu fyzickou sít na více logických sítí
+Co je to VLAN tag?,"Tag, který má 4 bajty a vsunuje se do rámce za MAC adresy, nese informaci o VLANID"
+Co je Cyclic Redundancy Check?,"Cyklický kontrolní součet, hashovací funkce založená na dělení polynomů, používá se např při kontrole IP hlavičky, či u FCS. Rozhodně nejde o kryptografickou hash funkci. Na to bacha. Skoro mi přijde, že to aní neni hash funkce, ale něco co hledá chyby v datech…"
+V jakých frekfvenčních pásmech se používají protokoly WiFi?,"2,4 GHz až 5 GHz."
+Jiný název pro WiFi?,Wireless LAN = WLAN
+Jaká je běžná topologie při použití WiFi?,Hvězdicová
+K čemu slouží Service Set Identifier?,K rozlišení jednotlivých WiFi sítí
+Jaký je hlavní problém WiFi sítí?,Bezpečnost. Útočník si prostě stoupne před budovu a jede. Nepotřebuje fyzický přístup.
+Jaká je funkce fyzické vrstvy (OSI 1)?,přenos dat po fyzickém médiu a převod mezi digitální a analogovou informací
+Jaké jsou typy médií ve fyzické vrstvě?,"Metalické, optické, bezdrátové"
+Při odesílání se na fyzické vrstvě převádí jaká informace na jakou?,Digitální na analogovou.
+Jak se jmenuje zařízení převádějící digitální signál na analogový?,modem
+Jak se jmenuje zařízení převádějící analogový signál na digitální?,codec
+Jaké kódování používát Ethernet?,Manchester
+Čím se vyznačuje kódování Manchaster?,"0 je na něm, když jdeme z vysokého na nízký. 1 z nízkého na vysoký."
+Co je baseband?,Pro zakódování informace se používá přímo hodnota signálu.
+Co je broadband?,"Pro zakódování informace se používá modulovaná hodnota signálu. Např. Posun fáze, změna amplitudy atp. Známe z rádia AM a FM."
+Co je nestíněná kroucená dvojlinka?,Dnes standartní způsob propojení v lokální síti.
+Jak se anglicky označuje nestíněná kroucená linka?,Unshielded Twiste Pair (UTP)
+Kolik vodičů najdeme v UTP?,8
+Co způsobuje ochranu stínění u UTP?,"UTP nemá stínění jako takové, ale když se do sebe správně propletou dva vodiče, vytvoří procházející proud elektromagnetické pole, které bude jako stínění fungovat."
+Co se skrývá pod zkratkou STP?,Shielded Twisted Pair.
+Rozdíl mezi UTP a STP?,STP má kolem vodičů dodatečné kovové stínění.
+Kolik vodičů využívá 100Mb Ethernet v UTP?,"Jen 4, můžeme tak propojit až dvě dvojice počítačů jedním UTP."
+Jaké konektory se používají s UTP?,RJ 45
+Co značí MDI/MDIX?,"Při komunikaci přes UTP je nutno dohodnout, které vodiče budou vstupní a které výstupní pro jakou stranu. Pod zkratkou se skrývá autodetekce, s poomocí které se mohou strany domluvit na tom, jak bude komunikace vypadat."
+Co je to křížený kabe/crossover?,"UTP kabel, kde jsou vodiče zapojeny do konektorů obráceně. Používá se, když chceme propojit stejná zařízení (dva počítače, dva swtiche atd)"
+Z jakého materiálu se vyrábějí optická vlákna?,Z SiO2
+Jaké jsou výhody optických kabelů?,"Velká šířka pásma, nízký útlum, nebolí nás rušení."
+Jaké jsou nevýhody optických kabelů?,"Vysoká cena, vysoký poloměr ohybu"
+Jaké jsou druhy optických kabelů?,Jednovidové (singlemode) a mnohovidové (multimode)
+Popis jednovidových optických vláken?,"Velmi drahá, přenos na velkou vzdálenost, využívá se laser, úzké jádro"
+Popis mnohovidových optických vláken?,"Páteřní rozvody LAN, lze použít I LED, menší dosah I přenosová kapacita"
+K čemu slouží repeater?,"Pracuje na fyzické vrstvě a předává dál signál, tím řeší problém útlumu."
+Nevýhoda repeateru?,"Zvyšuje pravděpodobnost kolizí, protože zpomalí přenos signálu a tím zvýší dobo pro šíření ramce po segmentu."
+Na jaké vrstvě pracuje bridge?,Linkové
+V jakém režimu běžně pracují přepínače?,"Learning bridge, pro každý port si udržují tabulky MAC adres stanic tím, že monitorují provoz."
+Co značí zkrata BUS u přepínačů?,Broadcast and Unknown Service
+Co značí zkrata BUM u přepínačů?,"Broadcast, Unknown and Multicast"
+Co je to multicast?,"Selektivnější broadcast, který dojde jen k příjemcům, kteří o něj stojí. V Ipv6 nahrazuje broadcast."
+Co značí STP?,Spanning Tree Protocol.
+K čemu se používá STP?,"Když si zapojíme kvůli robustnosti více switchů, vytvoříme nekonečnou smyčku, proto jen nektěrý switch může forwardovat. STP je protokol, který umožní najít kostru, po které pak potečou data."
+K čemu slouží VLAN?,Umožňuje na jedné síti vytvořit zdání vícero sítí.
+Jak pracuje CRC?,"Převede vstup na polynom a poté dělí charakteristickým polynomem a z toho nějak odvodí, jestli vstup byl koruptován."
+Co je learning bridge?,"Poslouchá komunikaci na obou segmentech a ukládá si, kde je jaká MAC adresa lokalizovaná. To mu umožňuje předávat informace cíleněji a snižovat tak zátěž na síť."
+Z jakého materiálu bývají UTP vodiče?,Měď
+Jaké typy metalických kabelů rozeznáváme?,Unshielded Twisted Pair (UTP) a Shielded Twisted Pair (STP)

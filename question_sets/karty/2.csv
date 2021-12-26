@@ -1,0 +1,56 @@
+Q,A
+Jaký je rozdíl mezi síťovým modelem a síťovou architekturou?,"Síťový model popisuje počet vrstev, jejich úkoly a strukturu. Síťová architektura obsahuje navíc konkrétní služby, technologie, rozhraní mezi vrstvami."
+Co se ukrývá pod zkratkou modelu OSI?,Open Systems Interconnection
+Vyjmenujte vrstvy OSI,"Aplikační, prezentační, relační, transportní, síťová, linková, fyzická"
+K čemu slouží aplikační vrstva OSI?,Zprostředkovává komunikaci mezi uživatelem a aplikačním protokolem
+Kdy a kdo zavedl OSI?,"1978, Mezinárodní organizace pro normalizaci (ISO)"
+K čemu slouží prezentační vrstva OSI?,"Prostředky pro vymazání rozdílů v interpretaci dat na různých zařízení, jako třeba z jaké strany se jí vajíčka"
+K čemu slouží relační vrstva OSI?,"Řídí dialog mezi aplikacemi, mnohdy irl pokryt sousedními vrstvami"
+K čemu slouží transportní vrstva OSI?,"Zodpovídá za přenost a příjem datových bloků, jejich segmentaci, některé protokoly zde poskytují tzv spolehlivý přenos, nerozumí sémantice dat"
+K čemu slouží síťová vrstva OSI?,"Zajišťuje přenos mezi dvě uzly, které se mohou nachát v jiných sítích, hledá cesta a směřování dat přes mezilehlé uzly"
+K čemu slouží linková vrstva OSI?,"Zajišťuje přenos mezi dvěma přímo propojenými uzly. Úkolem je určit zdroj a cíl přenosu, rozsah přenášených dat a odhalit  a opravit chyby, které mohly nastat při fyzickém přenosu"
+K čemu slouží fyzická vrstva OSI?,"Zabývá se pouze fyzickými aspekty přenosu, odpovídá za přenos bitových dat mezi uzlem a fyzickým médiem"
+Jak se označují standarty OSI?,X.číslo
+Popište X.400,"Message Handling System, nějakou dobu základem Microsoft Exchange Serveru. Složitá struktura adrese inspirovaná klasickou poštou"
+Popište X.500,"Directory Access Protocol, adresářová služba využívající strukturu adres jako X.400, velmi složitá, autoři například požadovali jako implicitní atribut osoby její oblíbený nápoj."
+Popište X.509,"Public Key Indrastructure, definuje formát a proces distribuce veřejný klíčů podepsaných Cas"
+Popište fungování vrstev 1 a 2 v TCP/IP,Tyto vrstvy vTCP/IP nejsou a odkazuje se na ně jako na síťové rozhraní
+Síťová vrstva v TCP/IP,"Obdobná jako v OSI, jmenuje se IP = Internet Protocol (reálně ale Ipv4 a Ipv6)"
+Transportní vrstva v TCP/IP,"Buď TCP = Transmission Control Protocol, nebo UDP = User Datagram Protocol"
+Aplikační vrstva v TCP/IP,V jedné vrstvě vše co dělá vrstva 5-7 v OSI
+Jaké protokoly TCP/IP stojí mimo přesnou hierarchii vrstev?,"Address Resolution Protocol, Internet Control Message Protocol"
+Příklady protokolů aplikační vrstvy TCP/IP,"FTP, HTTP, SMTP, DNS, SIP, [NFS, XDR, RPC]"
+Definujte spojovanou službu,"Jako telefoní hovor, aplikace se nemusí starat o to, jak funguje komunikace, veškerá odpovědnost spočívá na nizších vrstvách. Používá se v TCP. Aplikace ztrácí kontrolu nad procesem, nemůže pružně reagovat dle stavu sítě."
+Definujte nespojovanou službu,"Jako pošta, UDP je díky tomu velmi jednoduchý, správnost přenosu ponechává na aplikaci. Když dojde k problému zkouší aplikace jiný zdroj data, může na to upozornit uživatele apod…"
+Definujte model klient-server,"Klient zná pevnou adresu serveru, navazuje komunikaci, zadává požadavky. Server často obsluhuje více klientů. Jeden počítač bývá server v nějaké aplikaci a klient v jiné. Download server→ klient, upload klient → server."
+Definujte model peer-to-peer,"Neexistují vyhraněné role, aplikace funguje jako server I klient, nemusí znát pevné adresy zdrojů dat."
+MAC adresy,"Někdy označovány fyzické, ale s fyzickou vrstvou nemají nic společného. MAC = Media Acces Control. Nelze je používat ke komunikaci mezi sítěmi, protože nerespektují topologii sítě. Současné síťovky mají adresu v paměti, dříve byla pevně vypálená."
+Ethernetové adresy,"6 bajtů, skládají se z prefixu výrobce 3 bajty a čísla karty 3 bajty"
+IP adresy,"softwarové, umožňují komunikaci mezi sítěmi buď Ipv4, nebo Ipv6. Adresa má dvě části adresu sítě a adresu počítače. Předěl není přesně definován, záleží na nastavení sítě."
+Doménové adresy,"Mnemonický formát, hierarchie zprava doleva, nejdřív TLD."
+K čemu slouží DNS?,Převod mezi doménovými jmény a IP adresami.
+K čemu slouží ARP?,Převod mezi síťovými a MAC adresami.
+Může mít počítač více doménových jmen?,"Ano, je to navíc žádoucí běží—li na něm více služeb pro více doméň"
+Které RFC definovalo strukturu doménových jmen?,RFC 920
+Kdo spravuje TLD?,ICANN (Internet Corporation for Assigned Names and Numbers)
+Co označůje SLD?,Second Level Domain
+Kdo spravuje doménu cz,"CZ.NIC, což je korporace českých ISP"
+Kolik bajtů má ipv4 a kolik ipv6?,"4 bajty, 16 bajtů"
+Veřejné vs privátní adresy,"Veřejné adresy mohou přímo kumunikovat se zbytkem světa, přiděluje ISP. Privátní jsou uvnitř LAN, zvyšují bezpečnost, komplikují interoperabilitu. Směřovač na hranici LAN musí pro privátní sítě používat překlad adres (Network Address Translation)"
+Co je to port?,16bitové číslo identifikující jeden konec spojení
+Desination port,"Klient ho musí znát, je z well-known services (např web servery 80)"
+Source port,Navazovatele spojení přidělí lokální systém z neobsazených portů = generický port
+Co označůje socket?,Jeden konec komunikačního kanálu mezi klientem a serverem.
+Jednoznačnou identifikaci v TCP/IP zajišťuje uspořádaná pětice,"zdrojová IP, zdrojový port, cílová IP, cílový port, typ protokolu transportní vrstvy"
+Na jakém portu komunikuje FTP?,21
+Na jakém portu komunikuje SSH?,22
+Na jakém portu komunikuje SMTP?,25
+Na jakém portu komunikuje DNS?,53
+Na jakém portu komunikuje HTTP nešifrovaně?,80
+Na jakém portu komunikuje HTTPS šifrovaně?,443
+Na jakém portu komunikuje SIP?,"5060, 5061"
+Co označuje NAT?,Překlad adres.
+Jak vypadá URI adresa?,"schéma:[//]autorita[cesta][?dotaz][#fragment], autorita=[jméno[:heslo]@]adresa[:port]"
+Co značí URI?,Uniform Resource Identifier
+Co je multiplexing?,Spojování více analogových signálů nebo digitáľních datových toků do jednoho signálu
+Co je zapouzdření?,"v počítačových sítích spočívá ve vložení protokolové datové jednotky (Protocol Data Unit - PDU) vyšší vrstvy do protokolové jednotky nižší vrstvy, což umožňuje, aby vyšší vrstva mohla používat služby nižší vrstvy v protokolovém zásobníku a zároveň, aby data vyšší vrstvy mohla být přepravena sítí k protějšku na stejné vrstvě na jiném uzlu. "

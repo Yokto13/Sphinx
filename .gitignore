@@ -129,5 +129,5 @@ dmypy.json
 .pyre/
 
 .idea/
-question_sets/*
+# question_sets/*
 !.gitkeep

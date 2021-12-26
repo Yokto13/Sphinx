@@ -1,7 +1,7 @@
 """ Builds statistics from strings. """
-from custom_errors import UnknownStatisticsTypeError
-from statistics import ScoreStatistics
-from abstract_statistics import AbstractStatistcs
+from .custom_errors import UnknownStatisticsTypeError
+from .statistics import ScoreStatistics
+from .abstract_statistics import AbstractStatistcs
 
 
 class StatisticsBuilder:

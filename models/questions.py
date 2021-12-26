@@ -1,6 +1,6 @@
-from abstract_question import AbstractQuestion
-from statistics_holder import StatisticsHolder
-from statistics import ScoreStatistics
+from .abstract_question import AbstractQuestion
+from .statistics_holder import StatisticsHolder
+from .statistics import ScoreStatistics
 
 
 class BasicQuestion(AbstractQuestion):
@@ -24,6 +24,9 @@ class BasicQuestion(AbstractQuestion):
     def answer(self, val: str):
         self._answer = val
 
+    def __str__(self):
+        return f"{self.question},{self.answer}"
+
 
 class BasicQuestionWithStatistics(BasicQuestion):
     def __init__(self, answer: str = None, question: str = None, stats_raw: str = None, score: str = True):
@@ -40,3 +43,6 @@ class BasicQuestionWithStatistics(BasicQuestion):
             if score:
                 self.stats_holder.add_statistics("score", ScoreStatistics())
         super().__init__(answer, question)
+
+    def __str__(self):
+        return f"{self.question},{self.answer},{self.stats_holder.dump()}"

@@ -3,8 +3,8 @@
     One question might have multiple statistics (for example time, correctness...).
 """
 from typing import Dict
-from abstract_statistics import AbstractStatistcs
-from statistics_builder import StatisticsBuilder
+from .abstract_statistics import AbstractStatistcs
+from .statistics_builder import StatisticsBuilder
 
 
 class StatisticsHolder:

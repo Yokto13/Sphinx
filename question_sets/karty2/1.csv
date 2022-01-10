@@ -1,0 +1,21 @@
+Q,A
+Na jaké vrstvy se doporučuje rozdělit infrastrukturu LAN?,"Core, distribuční, vrstva přístupu"
+Přes jakou vrstvu je síť připojena k ISP?,Core vrstvu
+Jak se jinak říká distribuční vrstvě LAN?,Vertikální
+Jak se jinak říká vrstvě přístupu LAN?,Horizontální
+Jaké vrstvy nalezneme v konfiguraci WAN?,"Tier 1, Tier 2, Tier 3"
+Popište strukturu vrstev WAN,"Tier 1 jsou klíčoví hráči s přístupem k páteři internetu, Tier 2 je mezičlánek mezi páteří a ISP, Tier 3 je tvořen ISP, kteří pak připojují koncové zákazníky"
+Jaké jsou hlavní přenosové parametry?,"Latence, jitter, ztrátovost, šířka pásma"
+Co je to latence?,"Zpoždění komunikace, doba mezi odeseláním a doručením"
+Co je to jitter?,"Jak pravidelně jsou data doručována, tedy jak kolísá objem přijatých dat"
+Co je to ztrátovost?,"Jak často dochází k tomu, že nějaký paket není doručen"
+Co je to šířka pásma/bandwidth?,Kolik dat lze zakódovat a přenášet pomocí konkrétních fyzických signálů. Jistě to není rychlost signálu v médiu
+Co označuje QoS?,"Quality of Service, prioritizaci a rezervaci datových toků, aby síť I při velké zátěži dokázala přenášet důležitá data"
+Jak funguje strategie best effort?,"Využívá prioritních front, při velkéĺ zatížení nelze zabezpečit požadovanou rychlost. Problém je, že k zařazení paketu do fronty musí uzel načít značnou část paketu, aby rozkryl jeho prioritu."
+Jak základně funguje VPN?,"VPN = Virtual Private Network, na hranici každé sítě LAN je zařízení, které je s protějškem připojeno přes VPN tunel, v tom jsou data šifrována a vede přes veřejnou síť. Pro počítače v obou částech LAN se zdá, že jde jen o jednu síť."
+Jaká je dnes dominantní síťová technologie?,TCP/IP
+V jakém RFC byl poprvé použit termín Internet?,RFC 675 (definuje TCP)
+Co znamená RFC?,Requests For Comments
+Starší dokumenty RFC jsou označovány jak?,"Obsoleted, nebo Updated (v druhém případě platí nový I starý dokument)"
+Jaké jsou výhody a nevýhody přepojování paketů?,"Výhody odolnější a bezpečnější: výpadek uzlu není atální, nevýhody méně plynulé liší se doba přenosu"
+Co je smyslem požadavku na škálovatelnost sítě?,Aby se do sítě mohly připojovat snadno stále nová zařízení a nevyžadovalo to velké zásahy do konfigurace sítě

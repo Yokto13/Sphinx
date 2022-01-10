@@ -11,7 +11,7 @@ d = None
 
 # This routine is called to redraw screen "in menu's background"
 def screen_redraw(s, allow_cursor=False):
-    s.attr_color(C_WHITE, C_BLUE)
+    s.attr_color(C_WHITE, C_MAGENTA)
     s.cls()
     s.attr_reset()
     d.redraw()
@@ -48,6 +48,40 @@ def main_loop():
                 continue
             # Otherwise, dialog gets input
             res = d.handle_input(key)
+            if res == ACTION_OK:
+                print("OK")
+            if res is not None and res is not True:
+                return res
+
+def another_loop():
+    while 1:
+        key = m.get_input()
+
+        if isinstance(key, list):
+            # Mouse click
+            x, y = key
+            if m.inside(x, y):
+                m.focus = True
+
+        if m.focus:
+            # If menu is focused, it gets events. If menu is cancelled,
+            # it loses focus. Otherwise, if menu selection is made, we
+            # quit with with menu result.
+            res = m.handle_input(key)
+            if res == ACTION_CANCEL:
+                m.focus = False
+            elif res is not None and res is not True:
+                return res
+        else:
+            # If menu isn't focused, it can be focused by pressing F9.
+            if key == KEY_F9:
+                m.focus = True
+                m.redraw()
+                continue
+            # Otherwise, dialog gets input
+            res = d.handle_input(key)
+            if res == ACTION_OK:
+                print("NOT OK")
             if res is not None and res is not True:
                 return res
 
@@ -89,6 +123,7 @@ with Context():
     m.redraw()
 
     res = main_loop()
+    res = another_loop()
 
 
 print("Result:", res)

@@ -23,7 +23,7 @@ class StatisticsHolder:
         del self._statistics[key]
 
     def build_from_string(self, dump_of_holder: str):
-        raw_statistics = dump_of_holder.split(self.separator)
+        raw_statistics = dump_of_holder.split(self.stat_stat_separator)
         for raw in raw_statistics:
             stat_type, stat = StatisticsBuilder.build(raw)
             self.add_statistics(stat_type, stat)
@@ -39,3 +39,9 @@ class StatisticsHolder:
 
     def __delitem__(self, key):
         self.remove_statistics(key)
+
+    def __contains__(self, item):
+        return item in self._statistics
+
+    def __iter__(self):
+        return iter(self._statistics.values())

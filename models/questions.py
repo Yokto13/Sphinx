@@ -29,7 +29,7 @@ class BasicQuestion(AbstractQuestion):
 
 
 class BasicQuestionWithStatistics(BasicQuestion):
-    def __init__(self, answer: str = None, question: str = None, stats_raw: str = None, score: str = True):
+    def __init__(self, question: str = None, answer: str = None, stats_raw: str = None, score: str = True):
         """ Creates the question.
 
             :param stats_raw; if not None, it loads them with StatisticsLoader.
@@ -42,7 +42,7 @@ class BasicQuestionWithStatistics(BasicQuestion):
         else:
             if score:
                 self.stats_holder.add_statistics("score", ScoreStatistics())
-        super().__init__(answer, question)
+        super().__init__(question, answer)
 
     def __str__(self):
         return f"{self.question},{self.answer},{self.stats_holder.dump()}"

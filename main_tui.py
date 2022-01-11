@@ -34,21 +34,16 @@ def load_questions(questions_path, add_stats=False):
 
 
 # This routine is called to redraw screen "in menu's background"
-def screen_redraw(s, allow_cursor=False):
-    s.attr_color(C_WHITE, C_MAGENTA)
+def screen_redraw(s):
+    s.attr_color(C_WHITE, C_GREEN)
     s.cls()
     s.attr_reset()
     d.redraw()
 
 
-# We have two independent widgets on screen: dialog and main menu,
-# so can't call their individual loops, and instead should have
-# "main loop" to route events to currently active widget, and
-# switch the active one based on special events.
 def main_loop():
     while 1:
         key = m.get_input()
-
 
         if key == KEY_F1:
             b_answer_clicked(b_answer)
@@ -58,26 +53,8 @@ def main_loop():
             b_correct_clicked(b_correct)
         elif key == KEY_F4 and not b_wrong.disabled:
             b_wrong_clicked(b_wrong)
-
-        if m.focus:
-            # If menu is focused, it gets events. If menu is cancelled,
-            # it loses focus. Otherwise, if menu selection is made, we
-            # quit with with menu result.
-            res = m.handle_input(key)
-            if res == ACTION_CANCEL:
-                m.focus = False
-            elif res is not None and res is not True:
-                return res
         else:
-            # If menu isn't focused, it can be focused by pressing F9.
-            if key == KEY_F9:
-                m.focus = True
-                m.redraw()
-                continue
-            # Otherwise, dialog gets input
             res = d.handle_input(key)
-            if res == ACTION_OK:
-                print("OK")
             if res is not None and res is not True:
                 return res
 
@@ -85,11 +62,11 @@ def main_loop():
 with Context():
     d = Dialog(10, 5, 80, 20)
     d.add(1, 2, WLabel("Question sets:"))
-    w_listbox = WListBox(16, 4, IO.list_question_dir("question_sets"))
-    d.add(1, 3, w_listbox)
+    set_listbox = WListBox(16, 4, IO.list_question_dir("question_sets"))
+    d.add(1, 3, set_listbox)
 
     d.add(20, 2, WLabel("Packs in QS:"))
-    set_choice = IO.list_question_dir("question_sets")[w_listbox.choice]
+    set_choice = IO.list_question_dir("question_sets")[set_listbox.choice]
     pack_listbox = WListBox(16, 4, IO.list_question_dir(f"question_sets/{set_choice}"))
     d.add(20, 3, pack_listbox)
 
@@ -148,16 +125,13 @@ with Context():
     d.add(61, 16, b_wrong)
     b_wrong.on("click", b_wrong_clicked)
 
-
-    # QALabel = WLabel("Question/Answer label", w=40)
-    # d.add(40, 2, QALabel)
     questions: List[AbstractQuestion] = None
     current_question: AbstractQuestion = None
     answered: bool = False
 
     def w_listbox_changed(w):
         global set_choice
-        set_choice = IO.list_question_dir("question_sets")[w_listbox.choice]
+        set_choice = IO.list_question_dir("question_sets")[set_listbox.choice]
         pack_listbox.set_items(IO.list_question_dir(f"question_sets/{set_choice}"))
         pack_listbox.redraw()
 
@@ -187,11 +161,10 @@ with Context():
         b_correct.redraw()
         b_wrong.redraw()
 
-
-    w_listbox_changed(w_listbox)
+    w_listbox_changed(set_listbox)
     pack_listbox_changed(pack_listbox)
 
-    w_listbox.on("changed", w_listbox_changed)
+    set_listbox.on("changed", w_listbox_changed)
     pack_listbox.on("changed", pack_listbox_changed)
 
     toggle_answering()
@@ -210,7 +183,7 @@ with Context():
         StatisticsLabel.set_text("Saving work...")
     finally:
         if hasattr(questions[0], 'stats_holder'):
-            pack_choice = IO.list_question_dir(f"question_sets/{set_choice}")[w_listbox.choice]
+            pack_choice = IO.list_question_dir(f"question_sets/{set_choice}")[set_listbox.choice]
             with open(f"question_sets/{set_choice}/{pack_choice}", 'w') as csvfile:
                 writer = csv.writer(csvfile, delimiter=',')
                 writer.writerow(["Question", "Answer", "Stats"])

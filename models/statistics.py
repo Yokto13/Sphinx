@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from abstract_statistics import AbstractStatistcs
+from .abstract_statistics import AbstractStatistcs
 
 
 @dataclass

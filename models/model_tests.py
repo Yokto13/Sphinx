@@ -1,8 +1,8 @@
 import unittest
-from statistics_builder import StatisticsBuilder
-from statistics import ScoreStatistics
-from custom_errors import UnknownStatisticsTypeError
-from questions import BasicQuestion, BasicQuestionWithStatistics
+from .statistics_builder import StatisticsBuilder
+from .statistics import ScoreStatistics
+from .custom_errors import UnknownStatisticsTypeError
+from .questions import BasicQuestion, BasicQuestionWithStatistics
 
 
 class StatisticsBuilderTestCase(unittest.TestCase):
@@ -78,6 +78,12 @@ class BasicQuestionTestCase(unittest.TestCase):
         bq = BasicQuestion(q, a)
         self.assertEqual(bq.question, q)
         self.assertEqual(bq.answer, a)
+    
+    def test_str(self):
+        q = "What is the temperature of water in Bolevak?"
+        a = "2.5"
+        bq = BasicQuestion(q, a)
+        self.assertEqual(str(bq), f"{q},{a}")
 
 
 class BasicQuestionWithStatisticsTestCase(unittest.TestCase):

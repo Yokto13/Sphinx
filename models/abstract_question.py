@@ -25,3 +25,11 @@ class AbstractQuestion(ABC):
     @abstractmethod
     def answer(self, val):
         pass
+
+    def __str__(self):
+        pass
+
+    @property
+    @abstractmethod
+    def score(self):
+        pass

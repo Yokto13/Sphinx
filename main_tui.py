@@ -63,7 +63,7 @@ with Context():
     d = Dialog(10, 5, 80, 20)
     d.add(1, 2, WLabel("Question sets:"))
     sets = "question-sets"
-    set_listbox = WListBox(16, 4, IO.list_question_dir("%s" % sets))
+    set_listbox = WListBox(16, 4, IO.list_question_dir(f"{sets}"))
     d.add(1, 3, set_listbox)
 
     d.add(20, 2, WLabel("Packs in QS:"))
@@ -81,6 +81,7 @@ with Context():
     d.add(1,8, add_stats_checkbox)
 
     def b_answer_clicked(b):
+        questions.sort(key=lambda x: x.score)
         if QALabel.raw_text == current_question.question:
             QALabel.set_text(current_question.answer)
             b.t = "SHOW QUESTION(F1)"
@@ -138,12 +139,19 @@ with Context():
 
     def set_new_question():
         global current_question
-        current_question = random.choice(questions)
+        question_index = -1
+        while question_index < 0 or question_index >= len(questions):
+            question_index = int(random.gauss(0, len(questions)))
+        l = [q.score for q in questions]
+        print(l)
+        current_question = questions[question_index]
         QALabel.set_text(current_question.question)
         global answered
         answered = False
         if b_correct.disabled:
             toggle_answering()
+        b_answer.t = "SHOW ANSWER(F1)"
+        b_answer.redraw()
         if hasattr(current_question, 'stats_holder'):
             texts = []
             for stat in current_question.stats_holder:

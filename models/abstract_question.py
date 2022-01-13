@@ -28,3 +28,8 @@ class AbstractQuestion(ABC):
 
     def __str__(self):
         pass
+
+    @property
+    @abstractmethod
+    def score(self):
+        pass

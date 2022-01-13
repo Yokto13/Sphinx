@@ -62,12 +62,13 @@ def main_loop():
 with Context():
     d = Dialog(10, 5, 80, 20)
     d.add(1, 2, WLabel("Question sets:"))
-    set_listbox = WListBox(16, 4, IO.list_question_dir("question_sets"))
+    sets = "question-sets"
+    set_listbox = WListBox(16, 4, IO.list_question_dir("%s" % sets))
     d.add(1, 3, set_listbox)
 
     d.add(20, 2, WLabel("Packs in QS:"))
-    set_choice = IO.list_question_dir("question_sets")[set_listbox.choice]
-    pack_listbox = WListBox(16, 4, IO.list_question_dir(f"question_sets/{set_choice}"))
+    set_choice = IO.list_question_dir(sets)[set_listbox.choice]
+    pack_listbox = WListBox(16, 4, IO.list_question_dir(f"{sets}/{set_choice}"))
     d.add(20, 3, pack_listbox)
 
     QALabel = MultiLineLabel("", d, 40, 2, w=40, lines=8)
@@ -131,8 +132,8 @@ with Context():
 
     def w_listbox_changed(w):
         global set_choice
-        set_choice = IO.list_question_dir("question_sets")[set_listbox.choice]
-        pack_listbox.set_items(IO.list_question_dir(f"question_sets/{set_choice}"))
+        set_choice = IO.list_question_dir(sets)[set_listbox.choice]
+        pack_listbox.set_items(IO.list_question_dir(f"{sets}/{set_choice}" ))
         pack_listbox.redraw()
 
     def set_new_question():
@@ -151,8 +152,8 @@ with Context():
 
     def pack_listbox_changed(w):
         global questions
-        pack_choice = IO.list_question_dir(f"question_sets/{set_choice}")[w.choice]
-        questions = load_questions(f"question_sets/{set_choice}/{pack_choice}", add_stats=add_stats_checkbox.choice)
+        pack_choice = IO.list_question_dir(f"{sets}/{set_choice}")[w.choice]
+        questions = load_questions(f"{sets}/{set_choice}/{pack_choice}", add_stats=add_stats_checkbox.choice)
         set_new_question()
 
     def toggle_answering():
@@ -183,8 +184,8 @@ with Context():
         StatisticsLabel.set_text("Saving work...")
     finally:
         if hasattr(questions[0], 'stats_holder'):
-            pack_choice = IO.list_question_dir(f"question_sets/{set_choice}")[set_listbox.choice]
-            with open(f"question_sets/{set_choice}/{pack_choice}", 'w') as csvfile:
+            pack_choice = IO.list_question_dir(f"{sets}/{set_choice}")[set_listbox.choice]
+            with open(f"{sets}/{set_choice}/{pack_choice}", 'w') as csvfile:
                 writer = csv.writer(csvfile, delimiter=',')
                 writer.writerow(["Question", "Answer", "Stats"])
                 for q in questions:

@@ -1,6 +1,11 @@
 # Sphinx
 software to practice active-recall questions.
 
+## Note
+When you run the app without any question-packs in question-sets, it crashes.
+To fix it, add you own questions or use the submodule.
+How to do it is specified in the following section.
+
 ## FAQ
 ### What is active-recall?
 Method of learning based on recalling information from memory.
@@ -37,8 +42,11 @@ The structure of this directory is as follows
 ```
 question-sets/pack_about_some_course/file_with_questions_answers.csv
 ```
+So when you want to add new questions first create directory in question-sets
+with the name of your course for example and into this directory put the csv file
+containing questions and answers.
 
-You can look into the project directory for a sample csv file.
+There is a sample csv file to give you an idea how the csv file should be structured.
 
 ### I don't want to create questions!
 That's fine.

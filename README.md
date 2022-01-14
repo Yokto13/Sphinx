@@ -3,7 +3,7 @@ software to practice active-recall questions.
 
 ## Note
 When you run the app without any question-packs in question-sets, it crashes.
-To fix it, add you own questions or use the submodule.
+To fix it, add your own questions or use the submodule.
 How to do it is specified in the following section.
 
 ## FAQ

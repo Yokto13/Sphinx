@@ -219,7 +219,6 @@ with Context():
     finally:
         if hasattr(questions[0], 'stats_holder'):
             pack_choice = IO.list_packs_dir(f"{sets}/{set_choice}")[pack_listbox.choice]
-            print(pack_choice)
             with open(f"{sets}/{set_choice}/{pack_choice}", 'w') as csvfile:
                 writer = csv.writer(csvfile, delimiter=',')
                 writer.writerow(["Question", "Answer", "Stats"])

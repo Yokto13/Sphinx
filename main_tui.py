@@ -21,17 +21,17 @@ def load_questions(questions_path, add_stats=False):
     rows = IO.load_csv(questions_path)
     header = rows[0]
     questions = []
+    if len(header) < 2 or len(header) > 3:
+        raise TypeError("Wrong format of the CSV file. Please see README.md for more info.")
     if len(header) == 3:
         for row in rows[1:]:
             questions.append(BasicQuestionWithStatistics(question=row[0], answer=row[1], stats_raw=row[2]))
-    elif add_stats and len(header) == 2:
+    elif add_stats:
         for row in rows[1:]:
             questions.append(BasicQuestionWithStatistics(question=row[0], answer=row[1]))
-    elif len(header) == 2:
+    else:
         for row in rows[1:]:
             questions.append(BasicQuestion(question=row[0], answer=row[1]))
-    else:
-        raise TypeError("Wrong format of the CSV file. Please see README.md for more info.")
     return questions
 
 

@@ -32,13 +32,20 @@ When you are creating question-pack just create a csv file with question-answer 
 Stats are generated automatically when the corresponding checkbox is ticked 
 when using the Sphinx.
 
-You can look into question-sets for a sample csv file.
+CSV files should be saved in question-sets directory. 
+The structure of this directory is as follows 
+```
+question-sets/pack_about_some_course/file_with_questions_answers.csv
+```
+
+You can look into the project directory for a sample csv file.
 
 ### I don't want to create questions!
 That's fine.
 You can use some of the questions I have already created during my prep for exams.
 Just call
-```git submodule init
+```
+git submodule init
 git submodule update
 ```
 and you are ready to go!

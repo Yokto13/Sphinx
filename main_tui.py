@@ -143,7 +143,7 @@ with Context():
         global current_question
         question_index = -1
         while question_index < 0 or question_index >= len(questions):
-            question_index = int(random.gauss(0, len(questions)* 1.7))
+            question_index = int(random.gauss(0, len(questions) * 1.7))
         current_question = questions[question_index]
         QALabel.set_text(current_question.question)
         global answered

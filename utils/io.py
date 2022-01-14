@@ -9,7 +9,7 @@ def load_file(path: str) -> str:
 
 
 def list_question_dir(path: str) -> List[str]:
-    question_dirs = [el for el in listdir(path) if el[0] != '.']
+    question_dirs = sorted([el for el in listdir(path) if el[0] != '.'])
     return question_dirs
 
 

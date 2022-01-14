@@ -1,3 +1,9 @@
+"""
+This is currently WIP.
+Please use main_tui.py instead. I think it is much better to use it with TUI.
+I'm planning to do the raw version here, but right now it's not a priority.
+
+
 import utils.io as IO
 from models.questions import BasicQuestion
 
@@ -21,3 +27,4 @@ print(questions)
 for q in questions[:5]:
     print(q.question)
     print(q.answer)
+"""

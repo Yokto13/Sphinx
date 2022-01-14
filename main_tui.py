@@ -24,12 +24,14 @@ def load_questions(questions_path, add_stats=False):
     if len(header) == 3:
         for row in rows[1:]:
             questions.append(BasicQuestionWithStatistics(question=row[0], answer=row[1], stats_raw=row[2]))
-    elif add_stats:
+    elif add_stats and len(header) == 2:
         for row in rows[1:]:
             questions.append(BasicQuestionWithStatistics(question=row[0], answer=row[1]))
-    else:
+    elif len(header) == 2:
         for row in rows[1:]:
             questions.append(BasicQuestion(question=row[0], answer=row[1]))
+    else:
+        raise TypeError("Wrong format of the CSV file. Please see README.md for more info.")
     return questions
 
 
@@ -141,13 +143,12 @@ with Context():
         global current_question
         question_index = -1
         while question_index < 0 or question_index >= len(questions):
-            question_index = int(random.gauss(0, len(questions)))
-        l = [q.score for q in questions]
-        print(l)
+            question_index = int(random.gauss(0, len(questions)* 1.7))
         current_question = questions[question_index]
         QALabel.set_text(current_question.question)
         global answered
         answered = False
+        b_correct.redraw()
         if b_correct.disabled:
             toggle_answering()
         b_answer.t = "SHOW ANSWER(F1)"
@@ -157,6 +158,8 @@ with Context():
             for stat in current_question.stats_holder:
                 texts.append(str(stat))
             StatisticsLabel.set_text(" ".join(texts))
+        else:
+            StatisticsLabel.set_text("No stats found.")
 
     def pack_listbox_changed(w):
         global questions
@@ -175,8 +178,9 @@ with Context():
 
     set_listbox.on("changed", w_listbox_changed)
     pack_listbox.on("changed", pack_listbox_changed)
+    add_stats_checkbox.on("changed", lambda x: pack_listbox_changed(pack_listbox))
 
-    toggle_answering()
+    #toggle_answering()
 
     screen_redraw(Screen)
     Screen.set_screen_redraw(screen_redraw)

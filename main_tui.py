@@ -1,3 +1,4 @@
+import traceback
 from typing import List
 
 from picotui.widgets import *
@@ -67,12 +68,16 @@ with Context():
     # Listboxes to choose question set and pack.
     d.add(1, 2, WLabel("Question sets:"))
     sets = "question-sets"
-    set_listbox = WListBox(16, 4, IO.list_question_dir(f"{sets}"))
+    set_listbox = WListBox(16, 4, IO.list_sets_dir(f"{sets}"))
     d.add(1, 3, set_listbox)
 
     d.add(20, 2, WLabel("Packs in QS:"))
-    set_choice = IO.list_question_dir(sets)[set_listbox.choice]
-    pack_listbox = WListBox(16, 4, IO.list_question_dir(f"{sets}/{set_choice}"))
+    try:
+        set_choice = IO.list_sets_dir(sets)[set_listbox.choice]
+    except IndexError as e:
+        raise Exception("Are you sure that you have sets in the question-sets directory?") from e
+
+    pack_listbox = WListBox(16, 4, IO.list_packs_dir(f"{sets}/{set_choice}"))
     d.add(20, 3, pack_listbox)
 
     # Displays statistics if there are any.
@@ -140,8 +145,11 @@ with Context():
 
     def w_listbox_changed(w):
         global set_choice
-        set_choice = IO.list_question_dir(sets)[set_listbox.choice]
-        pack_listbox.set_items(IO.list_question_dir(f"{sets}/{set_choice}" ))
+        try:
+            set_choice = IO.list_sets_dir(sets)[set_listbox.choice]
+        except IndexError as e:
+            raise Exception("Are you sure that you have sets in the question-sets directory?") from e
+        pack_listbox.set_items(IO.list_packs_dir(f"{sets}/{set_choice}"))
         pack_listbox.redraw()
 
     def set_new_question():
@@ -172,7 +180,10 @@ with Context():
 
     def pack_listbox_changed(w):
         global questions
-        pack_choice = IO.list_question_dir(f"{sets}/{set_choice}")[w.choice]
+        try:
+            pack_choice = IO.list_packs_dir(f"{sets}/{set_choice}")[w.choice]
+        except IndexError as e:
+            raise Exception(f"Are you sure that you have packs in the question-sets/{set_choice} directory?") from e
         questions = load_questions(f"{sets}/{set_choice}/{pack_choice}", add_stats=add_stats_checkbox.choice)
         set_new_question()
 
@@ -207,7 +218,7 @@ with Context():
         StatisticsLabel.set_text("Saving work...")
     finally:
         if hasattr(questions[0], 'stats_holder'):
-            pack_choice = IO.list_question_dir(f"{sets}/{set_choice}")[set_listbox.choice]
+            pack_choice = IO.list_packs_dir(f"{sets}/{set_choice}")[set_listbox.choice]
             with open(f"{sets}/{set_choice}/{pack_choice}", 'w') as csvfile:
                 writer = csv.writer(csvfile, delimiter=',')
                 writer.writerow(["Question", "Answer", "Stats"])

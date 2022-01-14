@@ -1,4 +1,4 @@
-from os import listdir
+import os
 from typing import List
 import csv
 
@@ -8,8 +8,13 @@ def load_file(path: str) -> str:
         return f.read()
 
 
-def list_question_dir(path: str) -> List[str]:
-    question_dirs = sorted([el for el in listdir(path) if el[0] != '.'])
+def list_sets_dir(path: str) -> List[str]:
+    question_dirs = sorted([el for el in os.listdir(path) if el[0] != '.' and os.path.isdir(path + '/' + el)])
+    return question_dirs
+
+
+def list_packs_dir(path: str) -> List[str]:
+    question_dirs = sorted([el for el in os.listdir(path) if el[-3:] == 'csv'])
     return question_dirs
 
 

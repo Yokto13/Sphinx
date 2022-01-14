@@ -34,3 +34,9 @@ This file contains the definition of the TUI and also the main logic that handle
 answering, loading, and showing questions/answers and statistics.
 If you are not familiar with picotui I highly recommend trying first examples in its 
 [repo](https://github.com/pfalcon/picotui).
+
+A lot of the displayd objects calls some methods *on changed* those methods always have the 
+followin signature:
+```
+def name_of_the_object_changed(w):
+```

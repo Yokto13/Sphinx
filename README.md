@@ -60,3 +60,7 @@ Create an issue or if you feel like it fix it and do a PR. Thanks :)
 
 ## Screenshot
 ![screenshot](screenshot.png)
+
+## Stoping the app
+You can exit the app any time you want by pressing **CONTROL+C**. 
+No worries, everything will be saved.

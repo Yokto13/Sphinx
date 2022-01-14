@@ -63,6 +63,8 @@ def main_loop():
 
 with Context():
     d = Dialog(10, 5, 80, 20)
+
+    # Listboxes to choose question set and pack.
     d.add(1, 2, WLabel("Question sets:"))
     sets = "question-sets"
     set_listbox = WListBox(16, 4, IO.list_question_dir(f"{sets}"))
@@ -73,6 +75,7 @@ with Context():
     pack_listbox = WListBox(16, 4, IO.list_question_dir(f"{sets}/{set_choice}"))
     d.add(20, 3, pack_listbox)
 
+    # Displays statistics if there are any.
     QALabel = MultiLineLabel("", d, 40, 2, w=40, lines=8)
     StatisticsLabel = MultiLineLabel("", d, 1, 12, w=35, lines=5)
     StatisticsLabel.set_text(
@@ -113,6 +116,8 @@ with Context():
             if "score" in current_question.stats_holder:
                 current_question.stats_holder["score"].update(False)
 
+    # Buttons for controlling questions/answers.
+
     b_answer = WButton(19, "SHOW ANSWER(F1)")
     d.add(40, 14, b_answer)
     b_answer.on("click", b_answer_clicked)
@@ -141,6 +146,9 @@ with Context():
 
     def set_new_question():
         global current_question
+        # Get the next question.
+        # gauss favorizes lower numbers so questions with worse score are more likely to be selected.
+        # TODO(D): the best way to choose question needs more consideration.
         question_index = -1
         while question_index < 0 or question_index >= len(questions):
             question_index = int(random.gauss(0, len(questions) * 1.7))
@@ -153,6 +161,7 @@ with Context():
             toggle_answering()
         b_answer.t = "SHOW ANSWER(F1)"
         b_answer.redraw()
+        # If the question has statistics, display them.
         if hasattr(current_question, 'stats_holder'):
             texts = []
             for stat in current_question.stats_holder:
@@ -168,6 +177,7 @@ with Context():
         set_new_question()
 
     def toggle_answering():
+        """ Disables/enables wrong and correct buttons. """
         b_wrong.disabled = b_correct.disabled ^ 1
         b_correct.disabled = b_correct.disabled ^ 1
         b_correct.redraw()
@@ -189,6 +199,7 @@ with Context():
     m.permanent = True
     m.redraw()
 
+    # Ensures that statistics are saved on Interrupt.
     try:
         res = main_loop()
     except KeyboardInterrupt:

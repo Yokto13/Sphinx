@@ -8,7 +8,7 @@ It's beneficial to your long-term memory and also more enjoyable than reading no
 again.
 
 ### How to use this method?
-Study. Get/create questions. Practice questions. Sleep. Repeat.
+Study. Get/create question-packs. Practice questions. Sleep. Repeat.
 
 ### How to use Sphinx?
 - clone the repo
@@ -22,11 +22,13 @@ Right now the software expects csv files of the following format.
 
 2 or 3 columns.
 
+Comma is the delimeter.
+
 The first row is a header that can contain pretty much anything 
 but I use (Question, Answer, Stats).
-On each row, there is a question, followed byan answer and optionally stats.
+On each row, there is a question, followed by an answer and optionally stats.
 
-When you create questions just create a csv file with question-answer pairs.
+When you are creating question-pack just create a csv file with question-answer pairs.
 Stats are generated automatically when the corresponding checkbox is ticked 
 when using the Sphinx.
 
@@ -34,7 +36,7 @@ You can look into question-sets for a sample csv file.
 
 ### I don't want to create questions!
 That's fine.
-You can you some of the questions I have already created during my prep for exams.
+You can use some of the questions I have already created during my prep for exams.
 Just call
 ```git submodule init
 git submodule update

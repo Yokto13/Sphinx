@@ -18,9 +18,11 @@ Study. Get/create question-packs. Practice questions. Sleep. Repeat.
 ### How to use Sphinx?
 - clone the repo
 - install requirements
-- get questions (more on that in the following two questions)
+- get questions (more on that in the following three questions)
 - run 
-``` python main_tui.py ```
+``` 
+python main_tui.py 
+```
 
 ### How to create questions?
 Right now the software expects csv files of the following format.
@@ -47,6 +49,19 @@ with the name of your course for example and into this directory put the csv fil
 containing questions and answers.
 
 There is a sample csv file to give you an idea how the csv file should be structured.
+
+### Could you show the exact structure of the csv file?
+Sure.
+```
+Question,Answer
+How many seas must a white dove sail before she sleeps in the sand?,"The answer, my friend, is blowin' in the wind. The answer is blowin' in the wind."
+```
+or (when stats were generated):
+```
+Question,Answer,Stats
+How many roads must a man walk down before you call him a man?,42,"score?|?|?1,2"
+```
+Remember to enclose element in quotes if it contains a comma.
 
 ### I don't want to create questions!
 That's fine.

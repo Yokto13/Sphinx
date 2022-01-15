@@ -65,5 +65,5 @@ class BasicQuestionWithStatistics(BasicQuestion):
     @property
     def score(self):
         if self.score_stat:
-            return (self.stats_holder["score"].correct + 1 + self.last_used / 10) / (self.stats_holder["score"].total + 1)
+            return (self.stats_holder["score"].correct + 1) / (self.stats_holder["score"].total + 1 + self.last_used / 10)
         return 0

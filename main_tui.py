@@ -91,7 +91,6 @@ with Context():
     d.add(1,8, add_stats_checkbox)
 
     def b_answer_clicked(b):
-        questions.sort(key=lambda x: x.score)
         if QALabel.raw_text == current_question.question:
             QALabel.set_text(current_question.answer)
             b.t = "SHOW QUESTION(F1)"
@@ -157,10 +156,14 @@ with Context():
         # Get the next question.
         # gauss favorizes lower numbers so questions with worse score are more likely to be selected.
         # TODO(D): the best way to choose question needs more consideration.
+        for i in range(len(questions)):
+            questions[i].last_used += 1
+        questions.sort(key=lambda x: x.score)
         question_index = -1
         while question_index < 0 or question_index >= len(questions):
-            question_index = abs(int(random.gauss(0, len(questions) * 1.7)))
+            question_index = abs(int(random.gauss(0, len(questions) * 0.5)))
         current_question = questions[question_index]
+        questions[question_index].last_used = 0
         QALabel.set_text(current_question.question)
         global answered
         answered = False

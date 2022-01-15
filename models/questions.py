@@ -8,6 +8,7 @@ class BasicQuestion(AbstractQuestion):
         self._question: str = question
         self._answer: str = answer
         self._score = 0
+        self._last_used = 0
 
     @property
     def question(self):
@@ -30,7 +31,15 @@ class BasicQuestion(AbstractQuestion):
 
     @property
     def score(self):
-        return self._score
+        return self.last_used
+
+    @property
+    def last_used(self):
+        return self._last_used
+
+    @last_used.setter
+    def last_used(self, val):
+        self._last_used = val
 
 
 class BasicQuestionWithStatistics(BasicQuestion):
@@ -56,5 +65,5 @@ class BasicQuestionWithStatistics(BasicQuestion):
     @property
     def score(self):
         if self.score_stat:
-            return (self.stats_holder["score"].correct + 1) / (self.stats_holder["score"].total + 1)
+            return (self.stats_holder["score"].correct + 1 + self.last_used / 10) / (self.stats_holder["score"].total + 1)
         return 0

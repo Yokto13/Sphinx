@@ -83,7 +83,7 @@ and you are ready to go!
 But be aware of the fact that the majority of questions there is in Czech 
 and they are useful mainly for students of MFF CUNI.
 
-## How to use Sphinx?
+### How to use Sphinx?
 First select the question set and pack you want to use in the left upper part of the screen.
 If statistics were never calculated for this pack, you can enable them otherwise they are 
 used by default.

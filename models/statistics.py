@@ -12,7 +12,7 @@ class ScoreStatistics(AbstractStatistcs):
             self.correct, self.total = map(int, raw.split(','))
 
     def __str__(self):
-        return f"{self.correct} correct from {self.total} total."
+        return f"This question has score: {self.correct} correct from {self.total} tries."
 
     def update(self, correctly_answered: bool):
         self.correct += 1 if correctly_answered else 0

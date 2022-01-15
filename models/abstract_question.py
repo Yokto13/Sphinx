@@ -33,3 +33,13 @@ class AbstractQuestion(ABC):
     @abstractmethod
     def score(self):
         pass
+
+    @property
+    @abstractmethod
+    def last_used(self):
+        pass
+
+    @last_used.setter
+    @abstractmethod
+    def last_used(self, val):
+        pass

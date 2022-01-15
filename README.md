@@ -54,12 +54,14 @@ There is a sample csv file to give you an idea how the csv file should be struct
 Sure.
 ```
 Question,Answer
+How many roads must a man walk down before you call him a man?,42
 How many seas must a white dove sail before she sleeps in the sand?,"The answer, my friend, is blowin' in the wind. The answer is blowin' in the wind."
 ```
 or (when stats were generated):
 ```
 Question,Answer,Stats
 How many roads must a man walk down before you call him a man?,42,"score?|?|?1,2"
+How many seas must a white dove sail before she sleeps in the sand?,"The answer, my friend, is blowin' in the wind. The answer is blowin' in the wind.","score?|?|?0,10"
 ```
 Remember to enclose element in quotes if it contains a comma.
 

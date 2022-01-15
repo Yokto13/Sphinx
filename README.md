@@ -15,9 +15,15 @@ again.
 ### How to use this method?
 Study. Get/create question-packs. Practice questions. Sleep. Repeat.
 
-### How to use Sphinx?
+### How to get Sphinx?
 - clone the repo
+```
+git clone https://github.com/Yokto13/sphinx
+```
 - install requirements
+```
+pip install -r requirements.txt
+```
 - get questions (more on that in the following three questions)
 - run 
 ``` 
@@ -76,6 +82,18 @@ git submodule update
 and you are ready to go!
 But be aware of the fact that the majority of questions there is in Czech 
 and they are useful mainly for students of MFF CUNI.
+
+## How to use Sphinx?
+First select the question set and pack you want to use in the left upper part of the screen.
+If statistics were never calculated for this pack, you can enable them otherwise they are 
+used by default.
+Use buttons in the right part of the screen to practice.
+
+You can use arrows, tab and enter to navigate the screen.
+It is also possible to use F1 etc to push some buttons.
+There was a bug reported while using F-buttons on one device 
+so they may not be working perfectly :(.
+Mouse is also a good option and it works fine.
 
 ### Can I create/edit my own question-pack in the software?
 Nope. I played with the idea but came to the conclusion that editing question-packs is 

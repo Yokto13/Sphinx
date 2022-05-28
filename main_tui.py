@@ -17,22 +17,32 @@ import csv
 # Dialog on the screen
 d = None
 
+no_answer_text: str = "No answer was set."
+
 
 def load_questions(questions_path, add_stats=False):
     rows = IO.load_csv(questions_path)
-    header = rows[0]
+    first_row = rows[0]
     questions = []
-    if len(header) < 2 or len(header) > 3:
+    if not 1 <= len(first_row) <= 3:
         raise TypeError("Wrong format of the CSV file. Please see README.md for more info.")
-    if len(header) == 3:
-        for row in rows[1:]:
-            questions.append(BasicQuestionWithStatistics(question=row[0], answer=row[1], stats_raw=row[2]))
-    elif add_stats:
-        for row in rows[1:]:
-            questions.append(BasicQuestionWithStatistics(question=row[0], answer=row[1]))
+    if len(first_row) == 3:
+        for row in rows:
+            questions.append(BasicQuestionWithStatistics(question=row['Question'], answer=row['Answer'],
+                                                         stats_raw=row['Stats']))
     else:
-        for row in rows[1:]:
-            questions.append(BasicQuestion(question=row[0], answer=row[1]))
+        for row in rows:
+            question, answer, stats = [None] * 3
+            if 'Question' in row:
+                question = row['Question']
+            if 'Answer' in row:
+                answer = row['Answer']
+            if 'Stats' in row:
+                stats = row['Stats']
+            if stats is not None or add_stats:
+                questions.append(BasicQuestionWithStatistics(question=question, answer=answer, stats_raw=stats))
+            else:
+                questions.append(BasicQuestion(question=question, answer=answer))
     return questions
 
 
@@ -92,7 +102,10 @@ with Context():
 
     def b_answer_clicked(b):
         if QALabel.raw_text == current_question.question:
-            QALabel.set_text(current_question.answer)
+            if current_question.answer is None or current_question.answer == '':
+                QALabel.set_text(no_answer_text)
+            else:
+                QALabel.set_text(current_question.answer)
             b.t = "SHOW QUESTION(F1)"
         else:
             QALabel.set_text(current_question.question)
@@ -159,9 +172,11 @@ with Context():
         for i in range(len(questions)):
             questions[i].last_used += 1
         questions.sort(key=lambda x: x.score)
-        question_index = -1
-        while question_index < 0 or question_index >= len(questions):
-            question_index = abs(int(random.gauss(0, len(questions) * 0.5)))
+        #question_index = -1
+        #while question_index < 0 or question_index >= len(questions):
+        #    question_index = abs(int(random.gauss(0, len(questions) * 0.5)))
+        question_index = 0
+        assert question_index < len(questions)
         current_question = questions[question_index]
         questions[question_index].last_used = 0
         QALabel.set_text(current_question.question)

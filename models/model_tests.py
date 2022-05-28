@@ -45,12 +45,12 @@ class ScoreStatisticsTestCase(unittest.TestCase):
 
     def test_str(self):
         stat = ScoreStatistics()
-        self.assertEqual(str(stat), "0 correct from 0 total.")
+        self.assertEqual(str(stat), "This question has score: 0 correct from 0 tries.")
         for i in range(10):
             stat.update(False)
             self.assertEqual(stat.total, i + 1)
         stat.update(True)
-        self.assertEqual(str(stat), "1 correct from 11 total.")
+        self.assertEqual(str(stat), "This question has score: 1 correct from 11 tries.")
 
     def test_dump_load(self):
         stat = ScoreStatistics()
@@ -91,7 +91,7 @@ class BasicQuestionWithStatisticsTestCase(unittest.TestCase):
         """ Ultra simple test just checking if BQwS is created as expected. """
         q = "What is the temperature of water in Bolevak?"
         a = "2.5"
-        bq = BasicQuestionWithStatistics(q, a, score=True)
+        bq = BasicQuestionWithStatistics(q, a, score_stat=True)
         self.assertEqual(bq.question, q)
         self.assertEqual(bq.answer, a)
         self.assertEqual(bq.stats_holder["score"].total, 0)

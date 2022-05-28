@@ -1,5 +1,5 @@
 import os
-from typing import List
+from typing import List, Dict
 import csv
 
 
@@ -18,8 +18,8 @@ def list_packs_dir(path: str) -> List[str]:
     return question_dirs
 
 
-def load_csv(path: str) -> List[str]:
+def load_csv(path: str) -> List[Dict[str, str]]:
     with open(path, newline='') as csvfile:
-        reader = csv.reader(csvfile, delimiter=',')
+        reader = csv.DictReader(csvfile, delimiter=',')
         rows = [row for row in reader]
     return rows

@@ -31,7 +31,7 @@ class BasicQuestion(AbstractQuestion):
 
     @property
     def score(self):
-        return self.last_used
+        return 1/self.last_used
 
     @property
     def last_used(self):
@@ -43,11 +43,11 @@ class BasicQuestion(AbstractQuestion):
 
 
 class BasicQuestionWithStatistics(BasicQuestion):
-    def __init__(self, question: str = None, answer: str = None, stats_raw: str = None, score_stat: str = True):
+    def __init__(self, question: str = None, answer: str = None, stats_raw: str = None, score_stat: bool = True):
         """ Creates the question.
 
             :param stats_raw; if not None, it loads them with StatisticsLoader.
-            :param score;   if True it adds score statistics to the holder.
+            :param score_stat;   if True it adds score statistics to the holder.
                             This options is ignored if 'stats_raw is not None'.
         """
         self.stats_holder = StatisticsHolder()
